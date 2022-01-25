@@ -1,0 +1,40 @@
+.btn.header
+{
+    margin-right: 5%;
+    text-align: center;
+}
+
+.btn.header:hover
+{
+    border-color: #000000;
+    transform: scale(1.1);
+    transition: 0.3s;
+    background-color: #aaaaaa;
+    color: #ffffff;
+}
+
+.btnhead
+{
+    text-align: center;
+}
+
+.row.flux
+{
+    margin-top: 1%;
+}
+
+.col-8
+{
+    float: none;
+    margin: 0 auto;
+}
+
+.time
+{
+    float: right;
+}
+
+.title-review
+{
+    margin-top: 10%;
+}

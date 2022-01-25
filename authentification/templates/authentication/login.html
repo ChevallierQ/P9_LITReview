@@ -1,0 +1,33 @@
+{% extends 'base_connection.html' %}
+
+{% block title %}
+    LITReview - Login
+{% endblock title%}
+
+{% block content %}
+    <div class="container body">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                       <h5 class="card-title">Inscrivez-vous maintenant</h5>
+                       <button type="button" class="btn btn-light"><a href="{% url 'signup' %}">S’inscrire</a></button>
+                    </div>
+                 </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Connectez-vous</h5>
+                        <p>{{ message }}</p>
+                        <form method="post">
+                            {{ form.as_p }}
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-light gr">Se connecter</button>
+                        </form>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

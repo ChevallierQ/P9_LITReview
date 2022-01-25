@@ -1,0 +1,88 @@
+*, ::before, ::after
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    background-color: #aaaaaa;
+}
+
+.navbar-brand
+{
+    display: flex;
+    margin: 0 auto;
+}
+
+.container.body
+{
+    margin-top: 8%;
+}
+
+.center-block
+{
+    float: none;
+    margin: 0 auto;
+}
+
+.card-title:not(.ins)
+{
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.card-title.ins
+{
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.btn:not(.gr)
+{
+    border-width: 1px;
+    border-color:#000000;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+
+.btn.gr
+{
+    border-width: 1px;
+    border-color:#000000;
+    margin-top: 3%;
+    float: right;
+    margin-left: 1%;
+}
+
+.btn:hover
+{
+    border-color: #aaaaaa;
+    transform: scale(1.1);
+    transition: 0.3s;
+    background-color: #aaaaaa;
+    color: #ffffff;
+}
+
+.form-control
+{
+    text-align: center;
+}
+
+.form-floating.pass
+{
+    margin-top: 1rem;
+}
+
+a
+{
+    text-decoration: none;
+    color: #000000;
+}
+
+a:hover
+{
+    color: #ffffff;
+}
