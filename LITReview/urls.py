@@ -13,7 +13,8 @@ urlpatterns = [
     path('logout/', authentification.views.logout_page, name='logout'),
     path('flux/', litreview_app.views.home, name='flux'),
     path('ticket/', litreview_app.views.ticket, name='ticket'),
-    path('review_without_ticket/', litreview_app.views.review_without_ticket, name='review_without_ticket')
+    path('review_without_ticket/', litreview_app.views.review_without_ticket, name='review_without_ticket'),
+    path('subscription/', litreview_app.views.subscription, name='subscription'),
 ]
 
 if settings.DEBUG:

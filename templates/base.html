@@ -11,17 +11,17 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/root.css' %}">
     <title>{% block title %}{% endblock title %}</title>
     {% block styles %}{% endblock styles %}
-    <link rel="shortcut icon" href="{% static 'data/logo.ico' %}"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'data/favicon.ico' %}"/>
 </head>
 <body>
     
     <div class="bg-dark">
         <div class="row">
             <nav class="col navbar navbar-expand navbar-dark">
-                <a class="navbar-brand" href="">LITReview</a>
+                <a class="navbar-brand" href="{% url 'flux' %}">LITReview</a>
                 <a class="nav-link" href="{% url 'flux' %}">Flux</a>
                 <a class="nav-link" href="">Posts</a>
-                <a class="nav-link" href="">Abonnements</a>
+                <a class="nav-link" href="{% url 'subscription' %}">Abonnements</a>
                 <a class="nav-link" href="{% url 'logout' %}">Se déconnecter</a>
             </nav>
        </div>

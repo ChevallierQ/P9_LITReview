@@ -6,9 +6,10 @@ from . import models
 from . import forms
 
 
+
 @login_required
-def home(request):
-    return render(request, 'flux/flux.html')
+def subscription(request):
+    return render(request, 'subscription/subscription.html')
   
 
 @login_required
@@ -44,3 +45,9 @@ def review_without_ticket(request):
         'review_without_ticket_form': review_without_ticket_form
     }
     return render(request, 'review/review_without_ticket.html', context=context)
+
+
+@login_required
+def home(request):
+    tickets = models.Ticket.objects.all()
+    return render(request, 'flux/flux.html', context={'tickets': tickets})

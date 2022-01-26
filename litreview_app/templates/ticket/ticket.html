@@ -15,11 +15,11 @@
         <div class="col-8">
             <div class="card">
                 <div class="card-body">
-                <form method="post" enctype="multipart/form-data">
-                    {{ ticket_form.as_p }}
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-light">Envoyer</button>
-                </form>
+                    <form method="post" enctype="multipart/form-data">
+                        {{ ticket_form.as_p }}
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-light">Envoyer</button>
+                    </form>
                 </div>
              </div>
         </div>

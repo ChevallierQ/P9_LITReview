@@ -14,20 +14,23 @@
     <p>{{ request.user }}<p>
     <div class="btnhead">
         <button type="button" class="btn btn-light header"><a href="{% url 'ticket' %}">Demander une critique</a></button>
-        <button type="button" class="btn btn-light header">Créer une critique</button>
+        <button type="button" class="btn btn-light header"><a href="{% url 'review_without_ticket' %}">Créer une critique</a></button>
     </div>
 
-    <div class="row flux">
-        <div class="col-8">
-            <div class="card">
-                <div class="card-body">
-                    <span class="whopublish"><h6>Vous avez publié une critique</h6></span>
-                    <span class="time">13:14, 26 août 2020</span>
-                    <span class="title-review"><h5>Véritablement révolutionnaire - </h5><span class="rating"></span></span>
-                    <span class="review">Une excellente lecture et je vous recommande vivement !</span>
+    {% for ticket in tickets %}
+        <div class="row flux">
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body">
+                        <p>{{ ticket.time_created }}</p>
+                        <p>{{ ticket.user }} a demandé une critique</p>
+                        <p>{{ ticket.title }}</p>
+                        <p>{{ ticket.description }}</p>
+                        <img src="{{ ticket.image.url }}">
+                    </div>
                 </div>
-             </div>
+            </div>
         </div>
-    </div>
+    {% endfor %}
 
 {% endblock content %}
