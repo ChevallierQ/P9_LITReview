@@ -9,10 +9,11 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/flux.css' %}">
 {% endblock styles %}
 
-{% block bodyblock %}
+{% block content %}
 
+    <p>{{ request.user }}<p>
     <div class="btnhead">
-        <button type="button" class="btn btn-light header">Demander une critique</button>
+        <button type="button" class="btn btn-light header"><a href="{% url 'ticket' %}">Demander une critique</a></button>
         <button type="button" class="btn btn-light header">Créer une critique</button>
     </div>
 
@@ -20,7 +21,6 @@
         <div class="col-8">
             <div class="card">
                 <div class="card-body">
-                <p>{{ request.user }}<p>
                     <span class="whopublish"><h6>Vous avez publié une critique</h6></span>
                     <span class="time">13:14, 26 août 2020</span>
                     <span class="title-review"><h5>Véritablement révolutionnaire - </h5><span class="rating"></span></span>
@@ -30,4 +30,4 @@
         </div>
     </div>
 
-{% endblock bodyblock %}
+{% endblock content %}

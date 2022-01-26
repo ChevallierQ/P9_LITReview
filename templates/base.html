@@ -19,7 +19,7 @@
         <div class="row">
             <nav class="col navbar navbar-expand navbar-dark">
                 <a class="navbar-brand" href="">LITReview</a>
-                <a class="nav-link" href="{% url 'login' %}">Flux</a>
+                <a class="nav-link" href="{% url 'flux' %}">Flux</a>
                 <a class="nav-link" href="">Posts</a>
                 <a class="nav-link" href="">Abonnements</a>
                 <a class="nav-link" href="{% url 'logout' %}">Se déconnecter</a>
@@ -27,7 +27,7 @@
        </div>
     </div>
 
-    {% block bodyblock %}{% endblock bodyblock %}
+    {% block content %}{% endblock content %}
 
 </body>
 </html>

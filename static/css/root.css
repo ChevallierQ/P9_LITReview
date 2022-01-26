@@ -48,3 +48,25 @@ body
     background-color: #aaaaaa;
     color: #ffffff;
 }
+
+.row.flux
+{
+    margin-top: 1%;
+}
+
+.col-8
+{
+    float: none;
+    margin: 0 auto;
+}
+
+a
+{
+    text-decoration: none;
+    color: #000000;
+}
+
+a:hover
+{
+    color: #ffffff;
+}
