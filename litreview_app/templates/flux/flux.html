@@ -13,24 +13,29 @@
 
     <p>{{ request.user }}<p>
     <div class="btnhead">
-        <button type="button" class="btn btn-light header"><a href="{% url 'ticket' %}">Demander une critique</a></button>
+        <button type="button" class="btn btn-light header"><a href="{% url 'ticket' %}">Demander un ticket</a></button>
         <button type="button" class="btn btn-light header"><a href="{% url 'review_without_ticket' %}">Créer une critique</a></button>
     </div>
+    <div class="row flux">
+        {% for ticket in tickets %}
+            
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            
+                            <p>{{ ticket.user }} a demandé une critique</p>
+                            <p>{{ ticket.time_created }}</p>
+                            <p>{{ ticket.title }}</p>
+                            <p>{{ ticket.description }}</p>
+                            {% if ticket.image %}
+                                <img src="{{ ticket.image.url }}" height="300" width="200">
+                            {% endif %}
+                            <button type="button" class="btn btn-light">Créer une critique</button>
 
-    {% for ticket in tickets %}
-        <div class="row flux">
-            <div class="col-8">
-                <div class="card">
-                    <div class="card-body">
-                        <p>{{ ticket.time_created }}</p>
-                        <p>{{ ticket.user }} a demandé une critique</p>
-                        <p>{{ ticket.title }}</p>
-                        <p>{{ ticket.description }}</p>
-                        <img src="{{ ticket.image.url }}">
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    {% endfor %}
-
+            
+        {% endfor %}
+    </div>
 {% endblock content %}

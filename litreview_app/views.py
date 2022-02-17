@@ -1,3 +1,4 @@
+from asyncio import MultiLoopChildWatcher
 from pyexpat import model
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
@@ -9,8 +10,20 @@ from . import forms
 
 @login_required
 def subscription(request):
-    return render(request, 'subscription/subscription.html')
-  
+    form = forms.FollowUsersForm(instance=request.user)
+    if request.method == 'POST':
+        form = forms.FollowUsersForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('flux')
+    return render(request, 'subscription/subscription.html', context={'form': form})
+
+
+# @login_required
+# def posts(request):
+#     tickets = models.Ticket.objects.filter(contributors)
+#     return render(request, 'posts/posts.html', context={'tickets_self': tickets})
+
 
 @login_required
 def ticket(request):
