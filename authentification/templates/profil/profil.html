@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    LITReview - Profil
+{% endblock title %}
+
+{% block styles %}
+
+{% endblock styles %}
+
+{% block content %}
+    <div class="row flux">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-body">
+                    <h1>{{ request.user }}</h1>
+                    <p>{{ request.user.first_name }}</p>
+                    <p>{{ request.user.last_name }}</p>
+                    <p>{{ request.user.email }}</p>
+                    <p>{{ request.user.date_joined }}</p>
+                    <button type="button" class="btn btn-light"><a href="{% url 'profil_modify' %}">Modifier</a></button>
+                </div>
+             </div>
+        </div>
+    </div>
+{% endblock content %}

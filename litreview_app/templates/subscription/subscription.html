@@ -16,8 +16,11 @@
             <div class="card">
                 <div class="card-body">
                     <form class="bar" method="post">
-                        <input type="text" size="" placeholder="Nom d'utilisateur">
-                        <button type="submit">Envoyer</button>
+                        <form method="post">
+                            {{ form.as_p }}
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-light gr">Envoyer</button>
+                        </form>
                     </form>
                 </div>
              </div>
@@ -28,7 +31,12 @@
         <div class="col-8">
             <div class="card">
                 <div class="card-body">
-                    <p>{{ form.followed_user }}</p>
+                    {% for line in follow_model %}
+                        {% if line.user == request.user %}
+                            <p>{{ line.followed_user }}</p>
+                            <button>Se désabonner</button>
+                        {% endif %}
+                    {% endfor %}
                 </div>
              </div>
         </div>
@@ -38,7 +46,11 @@
         <div class="col-8">
             <div class="card">
                 <div class="card-body">
-                    
+                    {% for line in follow_model %}
+                        {% if line.followed_user == request.user %}
+                            <p>{{ line.user }}</p>
+                        {% endif %}
+                    {% endfor %}
                 </div>
              </div>
         </div>

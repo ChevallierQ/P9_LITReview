@@ -17,4 +17,4 @@ class ReviewForm(forms.ModelForm):
 class FollowUsersForm(forms.ModelForm):
     class Meta:
         model = models.UserFollows
-        fields = ['followed_user', 'user',]
+        fields = ['followed_user',]

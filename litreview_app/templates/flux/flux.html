@@ -11,31 +11,26 @@
 
 {% block content %}
 
-    <p>{{ request.user }}<p>
     <div class="btnhead">
-        <button type="button" class="btn btn-light header"><a href="{% url 'ticket' %}">Demander un ticket</a></button>
-        <button type="button" class="btn btn-light header"><a href="{% url 'review_without_ticket' %}">Créer une critique</a></button>
+        <a href="{% url 'ticket' %}"><button type="button" class="btn btn-light header">Demander un ticket</button></a>
+        <a href="{% url 'review_without_ticket' %}"><button type="button" class="btn btn-light header">Créer une critique</button></a>
     </div>
     <div class="row flux">
-        {% for ticket in tickets %}
-            
+        {% for unit in all %}
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            
-                            <p>{{ ticket.user }} a demandé une critique</p>
-                            <p>{{ ticket.time_created }}</p>
-                            <p>{{ ticket.title }}</p>
-                            <p>{{ ticket.description }}</p>
-                            {% if ticket.image %}
-                                <img src="{{ ticket.image.url }}" height="300" width="200">
+                            <p>{{ unit.user }} a demandé une critique</p>
+                            <p>{{ unit.time_created }}</p>
+                            <p>{{ unit.title }}</p>
+                            <p>{{ unit.description }}</p>
+                            {% if unit.image %}
+                                <img src="{{ unit.image.url }}" height="300" width="200">
                             {% endif %}
                             <button type="button" class="btn btn-light">Créer une critique</button>
-
                         </div>
                     </div>
                 </div>
-            
         {% endfor %}
     </div>
 {% endblock content %}

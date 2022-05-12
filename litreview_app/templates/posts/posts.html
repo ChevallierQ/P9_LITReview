@@ -11,22 +11,44 @@
 
 {% block content %}
     <h5>Vos posts</h5>
-    {% for ticket in tickets %}
-        <div class="row flux">
-            <div class="col-8">
-                <div class="card">
-                    <div class="card-body">
-                        <p>{{ ticket.time_created }}</p>
-                        <p>Vous avez publié une critique</p>
-                        <p>{{ ticket.title }}</p>
-                        <p>{{ ticket.description }}</p>
-                        {% if ticket.image %}
-                            <img src="{{ ticket.image.url }}">
-                        {% endif %}
-
+    {% for post in self_posts %}
+        {% if post.user == request.user %}
+            {% if  post.body %}
+            <div class="row flux">
+                <div class="col-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <p>{{ post.time_created }}</p>
+                            <p>Vous avez publié une critique</p>
+                            <p>{{ post.headline }}</p>
+                            <p>{{ post.body }}</p>
+                            <p>{{ post.rating }}</p>
+                            <button type="button" class="btn"><a href="{% url 'posts_modify' %}">Modifier</button>
+                            <button class="btn">Suppprimer</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            {% endif %}
+            {% if post.title %}
+                <div class="row flux">
+                    <div class="col-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <p>{{ post.time_created }}</p>
+                                <p>Vous avez demandé une critique</p>
+                                <p>{{ post.title }}</p>
+                                <p>{{ post.description }}</p>
+                                {% if post.image %}
+                                    <img height="300" width="200" src="{{ post.image.url }}">
+                                {% endif %}
+                                <a href="{% url 'posts_modify' %}"><button type="button" class="btn">Modifier</button></a>
+                                <button class="btn">Suppprimer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
     {% endfor %}
 {% endblock content %}

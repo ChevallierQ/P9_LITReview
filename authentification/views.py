@@ -45,3 +45,12 @@ def signup_page(request):
             login(request, user)
             return redirect('flux')
     return render(request, 'authentication/signup.html', context={'form': form})
+
+
+def profil_page(request):
+    return render(request, 'profil/profil.html')
+
+
+def profil_modify_page(request):
+    
+    return render(request, 'profil/profil_modify.html')
