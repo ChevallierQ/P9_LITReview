@@ -15,8 +15,9 @@ Target the file:
 ```
 cd ..\P9_LITReview
 ```
-Create a virtual environment:
+Install and create a virtual environment:
 ```
+python -m pip install virtualenv
 python -m venv env
 ```
 Activate this environment:
@@ -36,8 +37,9 @@ Target the file:
 ```
 cd ..\P9_LITReview
 ```
-Create a virtual environment:
+Install and create a virtual environment:
 ```
+python3 -m pip install virtualenv
 python3 -m venv env
 ```
 Activate this environment:
@@ -90,8 +92,9 @@ Ciblez le fichier:
 ```
 cd ..\P9_LITReview
 ```
-Créez un environement virtuel:
+Installez et créez un environement virtuel:
 ```
+python -m pip install virtualenv
 python -m venv env
 ```
 Activez cet environement:
@@ -111,8 +114,9 @@ Ciblez le fichier:
 ```
 cd ..\P9_LITReview
 ```
-Créez un environement virtuel:
+Installez et créez un environement virtuel:
 ```
+python3 -m pip install virtualenv
 python3 -m venv env
 ```
 Activez cet environement:

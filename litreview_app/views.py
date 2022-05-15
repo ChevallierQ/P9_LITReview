@@ -84,10 +84,16 @@ def review_without_ticket(request):
 
 @login_required
 def home(request):
-    review = list(models.Review.objects.all())
+    reviews = list(models.Review.objects.all())
     tickets = list(models.Ticket.objects.all())
-    all = tickets
-    for element in review :
-        all.append(element)
-
-    return render(request, 'flux/flux.html', context={'all': all})
+    follow = models.UserFollows.objects.all()
+    reviews_headline = []
+    for review_unit in reviews :
+        reviews_headline.append(review_unit.headline)
+    context = {
+            'tickets': tickets,
+            'reviews': reviews,
+            'reviews_headline': reviews_headline,
+            'follows': follow,
+        }
+    return render(request, 'flux/flux.html', context=context)
