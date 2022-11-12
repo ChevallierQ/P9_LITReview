@@ -1,4 +1,5 @@
 from re import template
+from sqlite3 import connect
 from tkinter.tix import Form
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
@@ -52,5 +53,5 @@ def profil_page(request):
 
 
 def profil_modify_page(request):
-    
     return render(request, 'profil/profil_modify.html')
+    

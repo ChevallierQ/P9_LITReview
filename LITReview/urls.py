@@ -15,10 +15,17 @@ urlpatterns = [
     path('profil_modify/', authentification.views.profil_modify_page, name='profil_modify'),
     path('flux/', litreview_app.views.home, name='flux'),
     path('ticket/', litreview_app.views.ticket, name='ticket'),
+
+
+    path('ticket/<int:id>/', litreview_app.views.ticket_detail, name='ticket_modify'),
+    path('review/<int:id>/', litreview_app.views.review_detail, name='review_modify'),
+
+    # path('ticket_delete/<int:id>/', litreview_app.views.ticket_delete, name='ticket_delete'),
+    # path('review_delete/<int:id>/', litreview_app.views.review_delete, name='review_delete'),
+    
     path('review_without_ticket/', litreview_app.views.review_without_ticket, name='review_without_ticket'),
     path('subscription/', litreview_app.views.subscription, name='subscription'),
     path('posts/', litreview_app.views.posts, name='posts'),
-    path('posts_modify/', litreview_app.views.posts_modify, name='posts_modify'),
 ]
 
 if settings.DEBUG:

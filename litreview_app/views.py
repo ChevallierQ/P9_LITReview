@@ -39,11 +39,6 @@ def posts(request):
 
 
 @login_required
-def posts_modify(request):
-    return render(request, 'posts/posts_modify.html')
-
-
-@login_required
 def ticket(request):
     ticket_form = forms.TicketForm()
     if request.method == 'POST':
@@ -57,6 +52,48 @@ def ticket(request):
         'ticket_form': ticket_form,
     }   
     return render(request, 'ticket/ticket.html', context=context)
+
+
+
+def ticket_detail(request, id):
+    ticket = models.Ticket.objects.get(id=id)
+    if request.method == 'POST':
+        form = forms.TicketForm(request.POST, instance=ticket)
+        if form.is_valid():
+            form.save()
+            return redirect('posts', ticket.id)
+    else:
+        form = forms.TicketForm(instance=ticket)
+    return render(request, 'posts/ticket_modify.html', {'form': form})
+
+
+def review_detail(request, id):
+    review = models.Review.objects.get(id=id)
+    if request.method == 'POST':
+        form = forms.ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            return redirect('posts', review.id)
+    else:
+        form = forms.ReviewForm(instance=review)
+    return render(request, 'posts/review_modify.html', {'form': form})
+
+
+def ticket_delete(request, id):
+    ticket = models.Ticket.objects.get(id=id)
+    if request.method == 'POST':
+        ticket.delete()
+        return redirect('posts')
+
+
+def review_delete(request, id):
+    review = models.Review.objects.get(id=id)
+    if request.method == 'POST':
+        review.delete()
+        return redirect('posts')
+
+
+
 
 
 @login_required

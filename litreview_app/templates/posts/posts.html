@@ -23,7 +23,7 @@
                             <p>{{ post.headline }}</p>
                             <p>{{ post.body }}</p>
                             <p>{{ post.rating }}</p>
-                            <button type="button" class="btn"><a href="{% url 'posts_modify' %}">Modifier</button>
+                            <a href="{% url 'review_modify' post.id %}"><button type="button" class="btn">Modifier</button></a>
                             <button class="btn">Suppprimer</button>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                                 {% if post.image %}
                                     <img height="300" width="200" src="{{ post.image.url }}">
                                 {% endif %}
-                                <a href="{% url 'posts_modify' %}"><button type="button" class="btn">Modifier</button></a>
+                                <a href="{% url 'ticket_modify' post.id %}"><button type="button" class="btn">Modifier</button></a>
                                 <button class="btn">Suppprimer</button>
                             </div>
                         </div>
