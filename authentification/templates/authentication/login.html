@@ -15,20 +15,20 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                       <h5 class="card-title">Inscrivez-vous maintenant</h5>
-                       <button type="button" class="btn btn-light"><a href="{% url 'signup' %}">S’inscrire</a></button>
+                       <h5 class="card-title">Sign up now !</h5>
+                       <button type="button" class="btn btn-light"><a href="{% url 'signup' %}">Sign up</a></button>
                     </div>
                  </div>
             </div>
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Connectez-vous</h5>
+                        <h5 class="card-title">Sign in</h5>
                         <p>{{ message }}</p>
                         <form method="post">
                             {{ form.as_p }}
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-light gr">Se connecter</button>
+                            <button type="submit" class="btn btn-light gr">Sign in</button>
                         </form>
                     </div>
                  </div>

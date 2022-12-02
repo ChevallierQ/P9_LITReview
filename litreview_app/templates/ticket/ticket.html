@@ -10,7 +10,7 @@
 {% endblock styles %}
 
 {% block content %}
-    <h5>Créer un ticket</h5>
+    <h5>Create a ticket</h5>
     <div class="row flux">
         <div class="col-8">
             <div class="card">
@@ -18,7 +18,7 @@
                     <form method="post" enctype="multipart/form-data">
                         {{ ticket_form.as_p }}
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-light">Envoyer</button>
+                        <button type="submit" class="btn btn-light">Publish</button>
                     </form>
                 </div>
              </div>

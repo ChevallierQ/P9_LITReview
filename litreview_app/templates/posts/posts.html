@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    LITReview - Posts
+    LITReview - Publishement
 {% endblock title %}
 
 {% block styles %}
@@ -10,7 +10,7 @@
 {% endblock styles %}
 
 {% block content %}
-    <h5>Vos posts</h5>
+    <h5>Your publishements</h5>
     {% for post in self_posts %}
         {% if post.user == request.user %}
             {% if  post.body %}
@@ -19,12 +19,15 @@
                     <div class="card">
                         <div class="card-body">
                             <p>{{ post.time_created }}</p>
-                            <p>Vous avez publié une critique</p>
+                            <p>You published a review</p>
                             <p>{{ post.headline }}</p>
                             <p>{{ post.body }}</p>
                             <p>{{ post.rating }}</p>
-                            <a href="{% url 'review_modify' post.id %}"><button type="button" class="btn">Modifier</button></a>
-                            <button class="btn">Suppprimer</button>
+                            <a href="{% url 'review_modify' post.id %}"><button type="button" class="btn">Modify</button></a>
+                            <form action="{% url 'review_delete' post.id %}" method="post">
+                                {% csrf_token %}
+                                <button class="btn">Delete</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -36,14 +39,17 @@
                         <div class="card">
                             <div class="card-body">
                                 <p>{{ post.time_created }}</p>
-                                <p>Vous avez demandé une critique</p>
+                                <p>You requested a review</p>
                                 <p>{{ post.title }}</p>
                                 <p>{{ post.description }}</p>
                                 {% if post.image %}
                                     <img height="300" width="200" src="{{ post.image.url }}">
                                 {% endif %}
-                                <a href="{% url 'ticket_modify' post.id %}"><button type="button" class="btn">Modifier</button></a>
-                                <button class="btn">Suppprimer</button>
+                                <a href="{% url 'ticket_modify' post.id %}"><button type="button" class="btn">Modify</button></a>
+                                <form action="{% url 'ticket_delete' post.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="btn">Delete</button>
+                                </form>
                             </div>
                         </div>
                     </div>

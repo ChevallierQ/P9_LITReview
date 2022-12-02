@@ -3,7 +3,7 @@ from sqlite3 import connect
 from tkinter.tix import Form
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from . import forms
+from . import forms, models
 from django.conf import settings
 from django.views.generic import View
 
@@ -52,6 +52,24 @@ def profil_page(request):
     return render(request, 'profil/profil.html')
 
 
-def profil_modify_page(request):
-    return render(request, 'profil/profil_modify.html')
+def profil_modify_page(request, id):
+
+    profil = models.User.objects.get(id=id)
+    if request.method == 'POST':
+        form = forms.ProfilForm(request.POST, instance=profil)
+        if form.is_valid():
+            form.save()
+            return redirect('profil')
+    else:
+        form = forms.ProfilForm(instance=profil)
+
+    return render(request, 'profil/profil_modify.html', {'form': form})
+
+
+def profil_delete(request, id):
+    profil = models.User.objects.get(id=id)
+    if request.method == 'POST':
+        profil.delete()
+        return redirect('login')
+
     

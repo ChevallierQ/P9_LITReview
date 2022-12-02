@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    LITReview - Review
+    LITReview - Review of a ticket
 {% endblock title %}
 
 {% block styles %}
@@ -16,8 +16,14 @@
             <div class="card">
                 <div class="card-body">
                     <form method="post" enctype="multipart/form-data">
-                        {{ ticket_form.as_p }}
-                        {{ review_without_ticket_form.as_p }}
+                        {{ ticket.user }}
+                        {{ ticket.time_created }}
+                        {{ ticket.title }}
+                        {{ ticket.description }}
+                        {% if ticket.image %}
+                                <img src="{{ ticket.image.url }}" height="300" width="200">
+                            {% endif %}
+                        {{ review_with_ticket_form.as_p }}
                         {% csrf_token %}
                         <button type="submit" class="btn btn-light">Publish</button>
                     </form>

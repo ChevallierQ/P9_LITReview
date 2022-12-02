@@ -1,7 +1,7 @@
 {% extends 'base_connection.html' %}
 
 {% block title %}
-    LITReview - Signup
+    LITReview - Sign up
 {% endblock title %}
 
 {% block content %}
@@ -10,15 +10,15 @@
             <div class="col-6 center-block">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title ins">Inscrivez-vous</h5>
+                        <h5 class="card-title ins">Sign up</h5>
                         {% if form.errors %}
                             {{ form.errors }}
                         {% endif %}
                         <form method="post">
                             {{ form.as_p }}
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-light gr">S’inscrire</button>
-                            <button type="button" class="btn btn-light gr"><a href="{% url 'login' %}">Retour</a></button>
+                            <button type="submit" class="btn btn-light gr">Sign up</button>
+                            <button type="button" class="btn btn-light gr"><a href="{% url 'login' %}">Back</a></button>
                         </form>
                     </div>
                  </div>

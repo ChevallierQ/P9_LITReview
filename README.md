@@ -64,6 +64,15 @@ python3 manage.py runserver
 Then connect to the local server on your browser at:
 http://127.0.0.1:8000/
 
+You also have the posibility to start the server on an other port with the following command:
+
+```
+python3 manage.py runserver *port_number*
+```
+
+The address will then be:
+ http://127.0.0.1:*port_number*/
+
 ***
 
 
@@ -144,11 +153,11 @@ http://127.0.0.1:8000/
 Vous avez aussi la possibilité de lancer le serveur sur un autre port avec la commande suivante: 
 
 ```
-python3 manage.py runserver *numero du port*
+python3 manage.py runserver *numero_du_port*
 ```
 
 L'adresse sera alors:
-http://127.0.0.1:*numero du port*/
+http://127.0.0.1:*numero_du_port*/
 
 ***
 

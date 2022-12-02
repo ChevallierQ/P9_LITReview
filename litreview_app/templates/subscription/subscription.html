@@ -10,7 +10,7 @@
 {% endblock styles %}
 
 {% block content %}
-    <h5>Suivre d'autres utilisateurs</h5>
+    <h5>Follow other users</h5>
     <div class="row flux">
         <div class="col-8">
             <div class="card">
@@ -19,14 +19,14 @@
                         <form method="post">
                             {{ form.as_p }}
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-light gr">Envoyer</button>
+                            <button type="submit" class="btn btn-light gr">Follow</button>
                         </form>
                     </form>
                 </div>
              </div>
         </div>
     </div>
-    <h5>Abonnements</h5>
+    <h5>Subscriptions</h5>
     <div class="row flux">
         <div class="col-8">
             <div class="card">
@@ -34,14 +34,17 @@
                     {% for line in follow_model %}
                         {% if line.user == request.user %}
                             <p>{{ line.followed_user }}</p>
-                            <button>Se désabonner</button>
+                            <form action="{% url 'subscription_unfollow' line.id %}" method="post">
+                                {% csrf_token %}
+                                <button class="btn">Unfollow</button>
+                            </form>
                         {% endif %}
                     {% endfor %}
                 </div>
              </div>
         </div>
     </div>
-    <h5>Abonnés</h5>
+    <h5>Subscribers</h5>
     <div class="row flux">
         <div class="col-8">
             <div class="card">

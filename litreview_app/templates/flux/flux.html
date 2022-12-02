@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    LITReview - Flux
+    LITReview - Home
 {% endblock title %}
 
 {% block styles %}
@@ -12,87 +12,95 @@
 {% block content %}
 
     <div class="btnhead">
-        <a href="{% url 'ticket' %}"><button type="button" class="btn btn-light header">Demander un ticket</button></a>
-        <a href="{% url 'review_without_ticket' %}"><button type="button" class="btn btn-light header">Créer une critique</button></a>
+        <a href="{% url 'ticket' %}"><button type="button" class="btn btn-light header">Request a ticket</button></a>
+        <a href="{% url 'review_without_ticket' %}"><button type="button" class="btn btn-light header">Create a review</button></a>
     </div>
     <div class="row flux">
-        {% for ticket in tickets %}
-            {% if ticket.user == request.user %}
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <p>Vous avez demandé une critique</p>
-                            <p>{{ ticket.time_created }}</p>
-                            <p>{{ ticket.title }}</p>
-                            <p>{{ ticket.description }}</p>
-                            {% if ticket.image %}
-                                <img src="{{ ticket.image.url }}" height="300" width="200">
-                            {% endif %}
-                            {% if ticket.title not in reviews_headline %}
-                                <button type="button" class="btn btn-light">Créer une critique</button>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
 
-            {% for follow in follows %}
-                {% if follow.user == request.user %}
-                    {% if follow.followed_user == ticket.user %}
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <p>{{ ticket.user }} a demandé une critique</p>
-                                    <p>{{ ticket.time_created }}</p>
-                                    <p>{{ ticket.title }}</p>
-                                    <p>{{ ticket.description }}</p>
-                                    {% if ticket.image %}
-                                        <img src="{{ ticket.image.url }}" height="300" width="200">
-                                    {% endif %}
-                                    {% if ticket.title not in reviews_headline %}
-                                        <button type="button" class="btn btn-light">Créer une critique</button>
-                                    {% endif %}
-                                </div>
+        {% for element in reviews_tickets %}
+            {% if not element.ticket_id %}
+
+                {% if element.user == request.user %}
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <p>You requested a review</p>
+                                <p>{{ element.time_created }}</p>
+                                <p>{{ element.title }}</p>
+                                <p>{{ element.description }}</p>
+                                {% if element.image %}
+                                    <img src="{{ element.image.url }}" height="300" width="200">
+                                {% endif %}
+                                {% if element.title not in reviews_headline %}
+                                    <a href="{% url 'review_with_ticket' element.id %}"><button type="button" class="btn btn-light">Create a review</button></a>
+                                {% endif %}
                             </div>
                         </div>
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-        {% endfor %}
-
-
-        {% for review in reviews %}
-            {% if review.user == request.user %}
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <p>Vous avez publié une critique</p>
-                            <p>{{ review.time_created }}</p>
-                            <p>{{ review.headline }}</p>
-                            <p>{{ review.rating }}</p>
-                            <p>{{ review.body }}</p>
-                        </div>
                     </div>
-                </div>
-            {% endif %}
+                {% endif %}
 
-            {% for follow in follows %}
-                {% if follow.user == request.user %}
-                    {% if follow.followed_user == review.user %}
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <p>{{ review.user }} a publié une critique</p>
-                                    <p>{{ review.time_created }}</p>
-                                    <p>{{ review.headline }}</p>
-                                    <p>{{ review.rating }}</p>
-                                    <p>{{ review.body }}</p>
+                {% for follow in follows %}
+                    {% if follow.user == request.user %}
+                        {% if follow.followed_user == element.user %}
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p>{{ element.user }} request a review</p>
+                                        <p>{{ element.time_created }}</p>
+                                        <p>{{ element.title }}</p>
+                                        <p>{{ element.description }}</p>
+                                        {% if element.image %}
+                                            <img src="{{ element.image.url }}" height="300" width="200">
+                                        {% endif %}
+                                        {% if element.title not in reviews_headline %}
+                                            <button type="button" class="btn btn-light">Create a review</button>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endif %}
                     {% endif %}
+                {% endfor %}
+                
+
+            {% endif %}
+            {% if element.ticket_id %}
+
+
+                {% if element.user == request.user %}
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <p>You published a review</p>
+                                <p>{{ element.time_created }}</p>
+                                <p>{{ element.headline }}</p>
+                                <p>{{ element.rating }}</p>
+                                <p>{{ element.body }}</p>
+                            </div>
+                        </div>
+                    </div>
                 {% endif %}
-            {% endfor %}
+
+                {% for follow in follows %}
+                    {% if follow.user == request.user %}
+                        {% if follow.followed_user == element.user %}
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p>{{ element.user }} published a review</p>
+                                        <p>{{ element.time_created }}</p>
+                                        <p>{{ element.headline }}</p>
+                                        <p>{{ element.rating }}</p>
+                                        <p>{{ element.body }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+            {% endif %}
         {% endfor %}
+
     </div>
 {% endblock content %}

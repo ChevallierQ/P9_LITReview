@@ -18,7 +18,7 @@
                     <p>{{ request.user.last_name }}</p>
                     <p>{{ request.user.email }}</p>
                     <p>{{ request.user.date_joined }}</p>
-                    <button type="button" class="btn btn-light"><a href="{% url 'profil_modify' %}">Modifier</a></button>
+                    <button type="button" class="btn btn-light"><a href="{% url 'profil_modify' request.user.id %}">Modify</a></button>
                 </div>
              </div>
         </div>

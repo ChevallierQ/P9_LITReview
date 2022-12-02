@@ -1,6 +1,10 @@
 from asyncio import MultiLoopChildWatcher
+from audioop import reverse
+from hashlib import new
+from pickle import TRUE
 from pyexpat import model
 from random import random
+from wsgiref.util import request_uri
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.template import context
@@ -17,9 +21,22 @@ def subscription(request):
     if request.method == 'POST':
         form = forms.FollowUsersForm(request.POST)
         if form.is_valid():
+            follow_list = list(models.UserFollows.objects.all())
+            follow_list.sort(key=lambda x: x.user_id)
             follow = form.save(commit=False)
-            follow.user = request.user
-            follow.save()
+            list_couple = list()
+            for element in follow_list:
+                couple = (element.user, element.followed_user)
+                list_couple.append(couple)
+            new_couple = (request.user, follow.followed_user) 
+            if new_couple not in list_couple:
+                if request.user != follow.followed_user:
+                    follow.user = request.user
+                    follow.save()
+                else:
+                    pass
+            else:
+                pass
 
     context = {
         'form': form,
@@ -27,6 +44,13 @@ def subscription(request):
         'follow_model': follow_model,
     }  
     return render(request, 'subscription/subscription.html', context=context)
+
+
+def subscription_unfollow(request, id):
+    unfollow = models.UserFollows.objects.get(id=id)
+    if request.method == 'POST':
+        unfollow.delete()
+        return redirect('subscription')
 
 
 @login_required
@@ -61,7 +85,7 @@ def ticket_detail(request, id):
         form = forms.TicketForm(request.POST, instance=ticket)
         if form.is_valid():
             form.save()
-            return redirect('posts', ticket.id)
+            return redirect('posts')
     else:
         form = forms.TicketForm(instance=ticket)
     return render(request, 'posts/ticket_modify.html', {'form': form})
@@ -73,7 +97,7 @@ def review_detail(request, id):
         form = forms.ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()
-            return redirect('posts', review.id)
+            return redirect('posts')
     else:
         form = forms.ReviewForm(instance=review)
     return render(request, 'posts/review_modify.html', {'form': form})
@@ -91,9 +115,6 @@ def review_delete(request, id):
     if request.method == 'POST':
         review.delete()
         return redirect('posts')
-
-
-
 
 
 @login_required
@@ -120,16 +141,36 @@ def review_without_ticket(request):
 
 
 @login_required
+def review_with_ticket(request, id):
+    ticket = models.Ticket.objects.get(id=id)
+    review_with_ticket_form = forms.ReviewForm()
+    if request.method == "POST":
+        ticket = forms.TicketForm(request.POST, instance=ticket)
+        review_with_ticket_form = forms.ReviewForm(request.POST)
+        if review_with_ticket_form.is_valid():
+            review_with_ticket = review_with_ticket_form.save(commit=False)
+            review_with_ticket.user = request.user
+            review_with_ticket.save()
+            return redirect('flux')
+    context = {
+        'ticket': ticket,
+        'review_with_ticket_form': review_with_ticket_form,
+    }
+    return render(request, 'review/review_with_ticket.html', context=context)
+
+
+@login_required
 def home(request):
     reviews = list(models.Review.objects.all())
     tickets = list(models.Ticket.objects.all())
     follow = models.UserFollows.objects.all()
+    reviews_tickets = reviews + tickets
+    reviews_tickets.sort(key=lambda x: x.time_created, reverse=True)
     reviews_headline = []
     for review_unit in reviews :
         reviews_headline.append(review_unit.headline)
     context = {
-            'tickets': tickets,
-            'reviews': reviews,
+            'reviews_tickets': reviews_tickets,
             'reviews_headline': reviews_headline,
             'follows': follow,
         }
