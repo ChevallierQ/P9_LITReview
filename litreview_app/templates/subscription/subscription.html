@@ -18,6 +18,14 @@
                     <form class="bar" method="post">
                         <form method="post">
                             {{ form.as_p }}
+                            
+                            <!-- <input list="user_name" placeholder="Nom d'utilisateur">
+                            <datalist id="user_name">
+                                {% for user in users %}
+                                    <option value="{{ user }}">
+                                {% endfor %}
+                            </datalist> -->
+
                             {% csrf_token %}
                             <button type="submit" class="btn btn-light gr">Follow</button>
                         </form>

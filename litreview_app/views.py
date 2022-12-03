@@ -15,6 +15,9 @@ from authentification import models as modelsA
 
 @login_required
 def subscription(request):
+    """
+        Def subscription is the view using to manage a relation between two user.
+    """
     form = forms.FollowUsersForm()
     users = modelsA.User.objects.all()
     follow_model = models.UserFollows.objects.all()
@@ -47,6 +50,9 @@ def subscription(request):
 
 
 def subscription_unfollow(request, id):
+    """
+        Def subscription_unfollow is the function using to unfollow a user.
+    """
     unfollow = models.UserFollows.objects.get(id=id)
     if request.method == 'POST':
         unfollow.delete()
@@ -55,6 +61,9 @@ def subscription_unfollow(request, id):
 
 @login_required
 def posts(request):
+    """
+        Def posts is the view using to manage the posts page.
+    """
     self_posts = list(models.Ticket.objects.all())
     self_review = list(models.Review.objects.all())
     for element in self_review:
@@ -64,6 +73,9 @@ def posts(request):
 
 @login_required
 def ticket(request):
+    """
+        Def ticket is the view using to manage the ticket page.
+    """
     ticket_form = forms.TicketForm()
     if request.method == 'POST':
         ticket_form = forms.TicketForm(request.POST, request.FILES)
@@ -80,6 +92,9 @@ def ticket(request):
 
 
 def ticket_detail(request, id):
+    """
+        Def ticket_detail is the view using to manage the ticket_modify page.
+    """
     ticket = models.Ticket.objects.get(id=id)
     if request.method == 'POST':
         form = forms.TicketForm(request.POST, instance=ticket)
@@ -92,6 +107,9 @@ def ticket_detail(request, id):
 
 
 def review_detail(request, id):
+    """
+        Def review_detail is the view using to manage the review_modify page.
+    """
     review = models.Review.objects.get(id=id)
     if request.method == 'POST':
         form = forms.ReviewForm(request.POST, instance=review)
@@ -104,6 +122,9 @@ def review_detail(request, id):
 
 
 def ticket_delete(request, id):
+    """
+        Def ticket_delete is the function using to delete a ticket.
+    """
     ticket = models.Ticket.objects.get(id=id)
     if request.method == 'POST':
         ticket.delete()
@@ -111,6 +132,9 @@ def ticket_delete(request, id):
 
 
 def review_delete(request, id):
+    """
+        Def review_delete is the function using to delete a review.
+    """
     review = models.Review.objects.get(id=id)
     if request.method == 'POST':
         review.delete()
@@ -119,6 +143,9 @@ def review_delete(request, id):
 
 @login_required
 def review_without_ticket(request):
+    """
+        Def review_without_ticket is the view using to manage the review_without_ticket page.
+    """
     ticket_form = forms.TicketForm()
     review_without_ticket_form = forms.ReviewForm()
     if request.method == 'POST':
@@ -142,6 +169,9 @@ def review_without_ticket(request):
 
 @login_required
 def review_with_ticket(request, id):
+    """
+        Def review_with_ticket is the view using to manage the review_with_ticket page.
+    """
     ticket = models.Ticket.objects.get(id=id)
     review_with_ticket_form = forms.ReviewForm()
     if request.method == "POST":
@@ -161,6 +191,9 @@ def review_with_ticket(request, id):
 
 @login_required
 def home(request):
+    """
+        Def home is the view using to manage the flux page.
+    """
     reviews = list(models.Review.objects.all())
     tickets = list(models.Ticket.objects.all())
     follow = models.UserFollows.objects.all()

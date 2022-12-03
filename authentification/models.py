@@ -3,6 +3,9 @@ from django.db import models
 
 
 class User(AbstractUser):
+    """
+        Class User is the model using to create a user with the native model AbstractUser.
+    """
     
     CREATOR = 'CREATOR'
     SUBSCRIBER = 'SUBSCRIBER'

@@ -4,6 +4,9 @@ from django.db import models
 
 
 class Ticket(models.Model):
+    """
+        Class Ticket is the model using to create a ticket.
+    """
     title = models.fields.CharField(max_length=128)
     description = models.fields.TextField(max_length=2048, blank=True)
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -12,6 +15,9 @@ class Ticket(models.Model):
 
 
 class Review(models.Model):
+    """
+        Class Review is the model using to create a review.
+    """
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
     headline = models.CharField(max_length=128)
@@ -21,6 +27,9 @@ class Review(models.Model):
 
 
 class UserFollows(models.Model):
+    """
+        Class UserFollows is the model using to create a relation between two user.
+    """
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='following')
     followed_user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='followed_by')
     
