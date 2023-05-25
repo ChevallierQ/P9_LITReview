@@ -49,6 +49,7 @@ def subscription(request):
     return render(request, 'subscription/subscription.html', context=context)
 
 
+@login_required
 def subscription_unfollow(request, id):
     """
         Def subscription_unfollow is the function using to unfollow a user.
@@ -90,7 +91,7 @@ def ticket(request):
     return render(request, 'ticket/ticket.html', context=context)
 
 
-
+@login_required
 def ticket_detail(request, id):
     """
         Def ticket_detail is the view using to manage the ticket_modify page.
@@ -106,6 +107,7 @@ def ticket_detail(request, id):
     return render(request, 'posts/ticket_modify.html', {'form': form})
 
 
+@login_required
 def review_detail(request, id):
     """
         Def review_detail is the view using to manage the review_modify page.
@@ -121,6 +123,7 @@ def review_detail(request, id):
     return render(request, 'posts/review_modify.html', {'form': form})
 
 
+@login_required
 def ticket_delete(request, id):
     """
         Def ticket_delete is the function using to delete a ticket.
@@ -131,6 +134,7 @@ def ticket_delete(request, id):
         return redirect('posts')
 
 
+@login_required
 def review_delete(request, id):
     """
         Def review_delete is the function using to delete a review.
@@ -208,3 +212,5 @@ def home(request):
             'follows': follow,
         }
     return render(request, 'flux/flux.html', context=context)
+
+

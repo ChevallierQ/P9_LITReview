@@ -7,6 +7,9 @@ from . import forms, models
 from django.conf import settings
 from django.views.generic import View
 
+from django.contrib.auth.decorators import login_required
+
+
 
 class LoginPage(View):
     """
@@ -63,6 +66,7 @@ def signup_page(request):
     return render(request, 'authentication/signup.html', context={'form': form})
 
 
+@login_required
 def profil_page(request):
     """
         Def profil_page is the function using to access at the user profil manager.
@@ -70,22 +74,29 @@ def profil_page(request):
     return render(request, 'profil/profil.html')
 
 
+@login_required
 def profil_modify_page(request, id):
     """
         Def profil_modify_page is the view using to manage the user profil page.
     """
     profil = models.User.objects.get(id=id)
-    if request.method == 'POST':
-        form = forms.ProfilForm(request.POST, instance=profil)
-        if form.is_valid():
-            form.save()
-            return redirect('profil')
+    id_user = profil.id
+    print(id,id_user)
+    if id == id_user:
+        if request.method == 'POST':
+            form = forms.ProfilForm(request.POST, instance=profil)
+            if form.is_valid():
+                form.save()
+                return redirect('profil')
+        else:
+            form = forms.ProfilForm(instance=profil)
     else:
-        form = forms.ProfilForm(instance=profil)
+        print("nop")
 
     return render(request, 'profil/profil_modify.html', {'form': form})
 
 
+@login_required
 def profil_delete(request, id):
     """
         Def profil_delete is the function using to delete the user profil.
