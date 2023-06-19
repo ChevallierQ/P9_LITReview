@@ -80,9 +80,8 @@ def profil_modify_page(request, id):
         Def profil_modify_page is the view using to manage the user profil page.
     """
     profil = models.User.objects.get(id=id)
-    id_user = profil.id
-    print(id,id_user)
-    if id == id_user:
+    print(id,request.user.id)
+    if id == request.user.id:
         if request.method == 'POST':
             form = forms.ProfilForm(request.POST, instance=profil)
             if form.is_valid():
@@ -90,10 +89,11 @@ def profil_modify_page(request, id):
                 return redirect('profil')
         else:
             form = forms.ProfilForm(instance=profil)
+        return render(request, 'profil/profil_modify.html', {'form': form})
     else:
         print("nop")
+        return render(request, 'profil/profil.html')
 
-    return render(request, 'profil/profil_modify.html', {'form': form})
 
 
 @login_required
